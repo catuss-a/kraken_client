@@ -1,15 +1,4 @@
-defmodule KrakenClient do
-  @moduledoc """
-  Documentation for KrakenClient.
-  """
-
-  use HTTPotion.Base
-
-  @base_uri "https://api.kraken.com"
-  @api_version "0"
-
-  def base_uri, do: @base_uri
-
+defmodule Kraken.Public do
   @doc """
   unixtime =  as unix timestamp
   rfc1123 = as RFC 1123 time format
@@ -54,7 +43,11 @@ defmodule KrakenClient do
   def spread(pair, since), do: get_public "Spread", %{pair: pair, since: since}
 
   defp get_public(method, opts \\ nil) do
-    url = @base_uri <> "/" <> @api_version <> "/public/" <> method
+    config = Kraken.Config.create
+    url = config.endpoint.base_uri <> "/" <> config.endpoint.api_version <> "/public/" <> method
+
     HTTPotion.get(url, query: opts)
   end
 end
+
+
