@@ -8,9 +8,6 @@ defmodule Kraken.Private do
     path_uri = "/" <> config.endpoint.api_version <> "/private/" <> method
     full_uri = config.endpoint.base_uri <> path_uri
 
-    IO.puts path_uri
-    IO.puts full_uri
-
     api_key = config.credentials.api_key 
     api_secret = config.credentials.api_secret |> Base.decode64 |> elem(1)
 
